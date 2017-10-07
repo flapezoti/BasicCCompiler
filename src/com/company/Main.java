@@ -1,7 +1,6 @@
 package com.company;
 
-
-import org.apache.commons.cli.Option;
+import java.util.List;
 
 import java.util.Map;
 
@@ -9,11 +8,26 @@ public class Main {
 
     public static void main(String[] args) throws Exception {
 
-        Map cmdLineArgsMap = CommandLineHelper.getCommandLineArgsAsMap(args);
+        TST tst = new TST();
+        Map<String,String> cmdLineArgsMap = CommandLineHelper.getCommandLineArgsAsMap(args);
 
-        /* TODO
-            Ler o arquivo com os símbolos a serem inseridos e para cada simbolo chamar a função search and insert da TST
-         */
+        String pathSimbolos = cmdLineArgsMap.get("arquivoSimbolos");
+        List<String> simbolosSimbolos = FileReader.fileToString(pathSimbolos);
+        for(String x : simbolosSimbolos){
+            tst.searchInsert(x, 'I', true);
+        }
 
+
+        tst.gravaTSTBinario(cmdLineArgsMap.get("arquivoTST"));
+
+        tst.leTSTBinario(cmdLineArgsMap.get("arquivoTST"));
+
+        String pathTeste = cmdLineArgsMap.get("arquivoTeste");
+        List<String> simbolosTeste = FileReader.fileToString(pathTeste);
+        for(String x : simbolosTeste){
+            tst.searchInsert(x, 'C', true);
+        }
+
+        tst.gravaTSTTexto(cmdLineArgsMap.get("arquivoLog"));
     }
 }

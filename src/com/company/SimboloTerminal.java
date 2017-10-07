@@ -1,12 +1,14 @@
 package com.company;
 
-public class SimboloTerminal {
+import java.io.Serializable;
+
+public class SimboloTerminal implements Serializable {
 
     private String simbolo;
     private int chaveProxSimbolo;
 
     public SimboloTerminal(){
-        this.simbolo = "/c";
+        this.simbolo = "\\0";
         this.chaveProxSimbolo = -2;
     }
 

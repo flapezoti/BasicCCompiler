@@ -1,19 +1,36 @@
 package com.company;
 
-public class TST {
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
+
+public class TST implements Serializable{
 
     private final static int N = 127;
     private final static int FIRST_COLLISION_INDEX = N ;
     private final static int FIRST_SPECIAL_TOKEN_INDEX = 2*N ;
+    private final String[] tokens_especiais = {"IDENT", "NUMBER", "FLOAT", "ALFA", "FOF"};
 
     private static int nextCollisionIndex;
-    private static SimboloTerminal[] tst;
+    private static int nextSpecialTokenIndex;
+    public static SimboloTerminal[] tst;
 
     public TST() {
        tst = new SimboloTerminal[2*N + 10];
        nextCollisionIndex = FIRST_COLLISION_INDEX;
+       nextSpecialTokenIndex = FIRST_SPECIAL_TOKEN_INDEX;
        for( int i = 0; i < tst.length; i++){
            tst[i] = new SimboloTerminal();
+       }
+
+       for( String token : tokens_especiais){
+            tst[nextSpecialTokenIndex].setSimbolo(token);
+            tst[nextSpecialTokenIndex].setChaveProxSimbolo(-1);
+            nextSpecialTokenIndex++;
        }
 
     }
@@ -21,25 +38,21 @@ public class TST {
     public int searchInsert(String simbolo, char mode, Boolean debug) throws Exception {
         int position;
         int key = hashFunction(simbolo);
-        System.out.println("HASHKEY do simbolo " + key );
         int parent_key;
         Boolean found = false;
 
         do {
-            System.out.println("Verificando posição: " + key );
-            if (tst[key].getSimbolo() == simbolo) {
+            if (tst[key].getSimbolo().equals(simbolo)) {
                 found = true;
             }
             parent_key = key;
             key = tst[key].getChaveProxSimbolo();
-            System.out.println("Próxima posição: " + key );
-
         } while ( key > 0 && !found);
 
         if ( found ) {
             position = parent_key;
         } else {
-            if (mode == 'C'){
+            if (mode == 'C') {
                 position = -1;
             } else if (mode == 'I') {
                 if (tst[parent_key].getChaveProxSimbolo() == -2) {
@@ -51,27 +64,63 @@ public class TST {
                     tst[parent_key].setChaveProxSimbolo(position);
                     nextCollisionIndex++;
                 }
-                System.out.println("INSERINDO NA POSIÇÃO" + position );
                 tst[position].setSimbolo(simbolo);
                 tst[position].setChaveProxSimbolo(-1);
-                position = position;
-                System.out.println("Simbolo" + tst[position].getSimbolo());
-                System.out.println("Posição" + tst[position].getChaveProxSimbolo());
             } else {
-                throw new Exception("Invalid mode");
+                throw new Exception("Modo invalido");
+            }
+        }
+
+        if(debug){
+            if( found ) {
+                System.out.println("Simbolo " + simbolo + " já existe na posição " + position);
+            } else {
+                if (mode == 'C') {
+                    System.out.println("Simbolo " + simbolo + " não encontrado");
+                } else if (mode == 'I') {
+                    System.out.println("Simbolo " + simbolo + " inserido na posição " + position);
+                }
             }
         }
         return position;
     };
 
-    private int hashFunction(String keyword){
+    private int hashFunction(String value){
         int key;
-        if (keyword.length() >=3) {
-            key = keyword.substring(0, 3).hashCode() % N;
+        if (value.length() >=3) {
+            key = value.substring(0, 3).hashCode() % N;
         } else {
-            key = keyword.charAt(0) % N;
+            key = value.charAt(0) % N;
         }
         return key;
     }
+
+    public void gravaTSTBinario(String path) throws IOException {
+        FileOutputStream fos = new FileOutputStream(path);
+        ObjectOutputStream oos = new ObjectOutputStream(fos);
+        oos.writeObject(tst);
+        oos.flush();
+        oos.close();
+    }
+
+    public void gravaTSTTexto(String path) throws IOException {
+        FileOutputStream fis = new FileOutputStream(path);
+        fis.write(("Tabela de simbolos terminais \n").getBytes());
+        for ( int i = 0; i < tst.length; i ++ ) {
+            fis.write((" Posição " + i ).getBytes());
+            fis.write((" Simbolo: " + tst[i].getSimbolo()).getBytes() );
+            fis.write((" Colisão: " + tst[i].getChaveProxSimbolo() + "\n").getBytes() );
+        }
+        fis.close();
+    }
+
+    public void leTSTBinario(String path) throws IOException, ClassNotFoundException {
+        FileInputStream fis = new FileInputStream(path);
+        ObjectInputStream ois = new ObjectInputStream(fis);
+        this.tst = (SimboloTerminal[])ois.readObject();
+        ois.close();
+    }
+
+
 
 }
