@@ -1,4 +1,8 @@
-package com.company;
+package com.pucsp.compilador;
+
+import com.pucsp.compilador.tabelaSimboloTerminal.CommandLineHelper;
+import com.pucsp.compilador.tabelaSimboloTerminal.FileReader;
+import com.pucsp.compilador.tabelaSimboloTerminal.TST;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package com.company;
+package com.pucsp.compilador.tabelaSimboloTerminal;
 
 
 import java.io.IOException;

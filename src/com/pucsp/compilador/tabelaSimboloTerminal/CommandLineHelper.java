@@ -1,4 +1,4 @@
-package com.company;
+package com.pucsp.compilador.tabelaSimboloTerminal;
 
 import java.util.HashMap;
 import java.util.Map;

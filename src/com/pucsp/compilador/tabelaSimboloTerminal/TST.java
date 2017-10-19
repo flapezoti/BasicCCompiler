@@ -1,6 +1,5 @@
-package com.company;
+package com.pucsp.compilador.tabelaSimboloTerminal;
 
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -32,7 +31,6 @@ public class TST implements Serializable{
             tst[nextSpecialTokenIndex].setChaveProxSimbolo(-1);
             nextSpecialTokenIndex++;
        }
-
     }
 
     public int searchInsert(String simbolo, char mode, Boolean debug) throws Exception {
