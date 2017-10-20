@@ -10,7 +10,11 @@ import java.util.Map;
 
 public class Main {
 
+
+    private final String[] tokens_especiais = {"IDENT", "NUMBER", "FLOAT", "ALFA", "FOF"};
+
     public static void main(String[] args) throws Exception {
+
 
         TST tst = new TST();
         Map<String,String> cmdLineArgsMap = CommandLineHelper.getCommandLineArgsAsMap(args);

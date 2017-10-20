@@ -12,7 +12,6 @@ public class TST implements Serializable{
     private final static int N = 127;
     private final static int FIRST_COLLISION_INDEX = N ;
     private final static int FIRST_SPECIAL_TOKEN_INDEX = 2*N ;
-    private final String[] tokens_especiais = {"IDENT", "NUMBER", "FLOAT", "ALFA", "FOF"};
 
     private static int nextCollisionIndex;
     private static int nextSpecialTokenIndex;
@@ -21,12 +20,6 @@ public class TST implements Serializable{
     public TST() {
 
        this.initializeSimbolosTerminais();
-
-       for( String token : tokens_especiais){
-            tst[nextSpecialTokenIndex].setSimbolo(token);
-            tst[nextSpecialTokenIndex].setChaveProxSimbolo(-1);
-            nextSpecialTokenIndex++;
-       }
 
     }
 
@@ -93,6 +86,18 @@ public class TST implements Serializable{
         }
         return position;
     };
+
+    public int insereSimboloEspecial(String simboloEspecial ){
+        int index = nextSpecialTokenIndex;
+        tst[index].setSimbolo(simboloEspecial);
+        tst[index].setChaveProxSimbolo(-1);
+        nextSpecialTokenIndex++;
+        return index;
+    }
+
+   /* public int buscaSimboloEspecial(){
+
+    } */
 
     private int hashFunction(String value){
         int key;
