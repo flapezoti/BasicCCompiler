@@ -95,9 +95,15 @@ public class TST implements Serializable{
         return index;
     }
 
-   /* public int buscaSimboloEspecial(){
-
-    } */
+    public int buscaSimboloEspecial(String simbolo){
+        int index = -1;
+        for( int i = FIRST_SPECIAL_TOKEN_INDEX; i < nextSpecialTokenIndex; i++){
+            if (tst[i].getSimbolo().equals(simbolo)){
+                index = i;
+            }
+        }
+        return index;
+    }
 
     private int hashFunction(String value){
         int key;
