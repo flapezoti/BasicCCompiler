@@ -9,17 +9,24 @@ import java.util.List;
 import java.util.Map;
 
 public class Main {
-
-
-    private final String[] tokens_especiais = {"IDENT", "NUMBER", "FLOAT", "ALFA", "FOF"};
-
+    
     public static void main(String[] args) throws Exception {
 
-
-        TST tst = new TST();
         Map<String,String> cmdLineArgsMap = CommandLineHelper.getCommandLineArgsAsMap(args);
 
-        String pathSimbolos = cmdLineArgsMap.get("listaSimbolosTerminais");
+        String tstPath = cmdLineArgsMap.get("arquivoTstBinario");
+        TST tst = new TST(tstPath);
+
+        /*
+        * 10. Incluir manualmente, os seguintes elementos na parte especial da TST:
+          ID, NUMBER, FLOAT, ALPHA, EOF defina constantes para eles
+        */
+
+        final int ID_INDEX = tst.insereSimboloEspecial("ID");
+        final int NUMBER_INDEX = tst.insereSimboloEspecial("NUMBER");
+        final int FLOAT_INDEX = tst.insereSimboloEspecial("FLOAT");
+        final int ALPHA_INDEX = tst.insereSimboloEspecial("ALPHA");
+        final int EOF_INDEX = tst.insereSimboloEspecial("EOF");
 
     }
 }
