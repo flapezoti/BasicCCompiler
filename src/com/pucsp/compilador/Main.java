@@ -15,23 +15,13 @@ public class Main {
         TST tst = new TST();
         Map<String,String> cmdLineArgsMap = CommandLineHelper.getCommandLineArgsAsMap(args);
 
-        String pathSimbolos = cmdLineArgsMap.get("arquivoSimbolos");
+        String pathSimbolos = cmdLineArgsMap.get("listaSimbolosTerminais");
         List<String> simbolosSimbolos = FileReader.fileToString(pathSimbolos);
         for(String x : simbolosSimbolos){
             tst.searchInsert(x, 'I', true);
         }
 
-
-        tst.gravaTSTBinario(cmdLineArgsMap.get("arquivoTST"));
-
-        tst.leTSTBinario(cmdLineArgsMap.get("arquivoTST"));
-
-        String pathTeste = cmdLineArgsMap.get("arquivoTeste");
-        List<String> simbolosTeste = FileReader.fileToString(pathTeste);
-        for(String x : simbolosTeste){
-            tst.searchInsert(x, 'C', true);
-        }
-
-        tst.gravaTSTTexto(cmdLineArgsMap.get("arquivoLog"));
+        tst.gravaTSTBinario(cmdLineArgsMap.get("tstArquivoBinario"));
+        tst.gravaTSTTexto(cmdLineArgsMap.get("tstArquivoTexto"));
     }
 }

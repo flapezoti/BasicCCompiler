@@ -19,18 +19,29 @@ public class TST implements Serializable{
     public static SimboloTerminal[] tst;
 
     public TST() {
-       tst = new SimboloTerminal[2*N + 10];
-       nextCollisionIndex = FIRST_COLLISION_INDEX;
-       nextSpecialTokenIndex = FIRST_SPECIAL_TOKEN_INDEX;
-       for( int i = 0; i < tst.length; i++){
-           tst[i] = new SimboloTerminal();
-       }
+
+       this.initializeSimbolosTerminais();
 
        for( String token : tokens_especiais){
             tst[nextSpecialTokenIndex].setSimbolo(token);
             tst[nextSpecialTokenIndex].setChaveProxSimbolo(-1);
             nextSpecialTokenIndex++;
        }
+
+    }
+
+    public TST(String tstFilePath) throws IOException, ClassNotFoundException {
+        initializeSimbolosTerminais();
+        leTSTBinario(tstFilePath);
+    }
+
+    private void initializeSimbolosTerminais(){
+        this.tst = new SimboloTerminal[2*N + 10];
+        this.nextCollisionIndex = FIRST_COLLISION_INDEX;
+        this.nextSpecialTokenIndex = FIRST_SPECIAL_TOKEN_INDEX;
+        for( int i = 0; i < this.tst.length; i++){
+            this.tst[i] = new SimboloTerminal();
+        }
     }
 
     public int searchInsert(String simbolo, char mode, Boolean debug) throws Exception {

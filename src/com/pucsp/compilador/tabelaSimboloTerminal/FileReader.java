@@ -11,7 +11,7 @@ import java.util.stream.Stream;
 public class FileReader {
 
 
-    static List<String> fileToString(String path) {
+    public static List<String> fileToString(String path) {
 
         List<String> simbolos = new ArrayList<String>();
 

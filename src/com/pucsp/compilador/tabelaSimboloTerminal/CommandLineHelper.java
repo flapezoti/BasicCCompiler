@@ -20,25 +20,20 @@ public class CommandLineHelper {
             throw new IllegalArgumentException("Command Line args can't be null");
         }
 
-        final String arquivoSimbolosArg = "arquivoSimbolos";
+        final String arquivoSimbolosArg = "listaSimbolosTerminais";
         final Option arquivoSimbolosOption = new Option( arquivoSimbolosArg, true, "Caminho do arquivo com os símbolos terminais da linguagem");
         arquivoSimbolosOption.setRequired( true );
         options.addOption(arquivoSimbolosOption);
 
-        final String arquivoTSTArg = "arquivoTST";
+        final String arquivoTSTArg = "tstArquivoBinario";
         final Option arquivoTSTOption = new Option( arquivoTSTArg, true, "Caminho para arquivo binário de saída da tabela de simbolos terminais");
         arquivoTSTOption.setRequired( true );
         options.addOption(arquivoTSTOption);
 
-        final String arquivoLogArg = "arquivoLog";
+        final String arquivoLogArg = "tstArquivoTexto";
         final Option arquivoLogOption = new Option( arquivoLogArg, true, "Caminho para arquivo texto de saída dos logs da aplicação");
         arquivoLogOption.setRequired( true );
         options.addOption(arquivoLogOption);
-
-        final String arquivoTesteArg = "arquivoTeste";
-        final Option arquivoTesteOption = new Option( arquivoTesteArg, true, "Caminho para o arquivo texto de teste");
-        arquivoTesteOption.setRequired( true );
-        options.addOption(arquivoTesteOption);
 
 
         final Parser parser = new GnuParser();
@@ -56,7 +51,6 @@ public class CommandLineHelper {
         Map<String,String> cmdArgsMap = new HashMap<String, String>();
         cmdArgsMap.put(arquivoSimbolosArg, commandLine.getOptionValue(arquivoSimbolosArg));
         cmdArgsMap.put(arquivoLogArg, commandLine.getOptionValue(arquivoLogArg));
-        cmdArgsMap.put(arquivoTesteArg, commandLine.getOptionValue(arquivoTesteArg));
         cmdArgsMap.put(arquivoTSTArg, commandLine.getOptionValue(arquivoTSTArg));
 
         return cmdArgsMap;
