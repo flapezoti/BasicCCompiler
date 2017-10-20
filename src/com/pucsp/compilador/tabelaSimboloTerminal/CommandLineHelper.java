@@ -12,6 +12,13 @@ import org.apache.commons.cli.ParseException;
 
 public class CommandLineHelper {
 
+    /*
+    * 4.  Adotar três parâmetros para o programa principal
+          a) Arquivo de entrada contendo a cadeia de entrada com a sequência de tokens.
+          b) Arquivo de saída com mensagens e outras informações.
+          c) Arquivo binário para obter a TST.
+    * */
+
     public static Map<String,String> getCommandLineArgsAsMap(String[] args){
         final Options options
                 = new Options();
@@ -20,18 +27,18 @@ public class CommandLineHelper {
             throw new IllegalArgumentException("Command Line args can't be null");
         }
 
-        final String arquivoSimbolosArg = "listaSimbolosTerminais";
-        final Option arquivoSimbolosOption = new Option( arquivoSimbolosArg, true, "Caminho do arquivo com os símbolos terminais da linguagem");
+        final String arquivoFonte = "arquivoFonte";
+        final Option arquivoSimbolosOption = new Option( arquivoFonte, true, "Caminho do arquivo com a sequência de caracteres a serem analisados");
         arquivoSimbolosOption.setRequired( true );
         options.addOption(arquivoSimbolosOption);
 
-        final String arquivoTSTArg = "tstArquivoBinario";
-        final Option arquivoTSTOption = new Option( arquivoTSTArg, true, "Caminho para arquivo binário de saída da tabela de simbolos terminais");
+        final String arquivoSaida = "arquivoSaida";
+        final Option arquivoTSTOption = new Option( arquivoSaida, true, "Caminho para arquivo de saída com erros e mensagens");
         arquivoTSTOption.setRequired( true );
         options.addOption(arquivoTSTOption);
 
-        final String arquivoLogArg = "tstArquivoTexto";
-        final Option arquivoLogOption = new Option( arquivoLogArg, true, "Caminho para arquivo texto de saída dos logs da aplicação");
+        final String arquivoTstBinario = "arquivoTstBinario";
+        final Option arquivoLogOption = new Option( arquivoTstBinario, true, "Caminho para arquivo texto de saída dos logs da aplicação");
         arquivoLogOption.setRequired( true );
         options.addOption(arquivoLogOption);
 
@@ -49,9 +56,9 @@ public class CommandLineHelper {
         }
 
         Map<String,String> cmdArgsMap = new HashMap<String, String>();
-        cmdArgsMap.put(arquivoSimbolosArg, commandLine.getOptionValue(arquivoSimbolosArg));
-        cmdArgsMap.put(arquivoLogArg, commandLine.getOptionValue(arquivoLogArg));
-        cmdArgsMap.put(arquivoTSTArg, commandLine.getOptionValue(arquivoTSTArg));
+        cmdArgsMap.put(arquivoFonte, commandLine.getOptionValue(arquivoFonte));
+        cmdArgsMap.put(arquivoTstBinario, commandLine.getOptionValue(arquivoTstBinario));
+        cmdArgsMap.put(arquivoSaida, commandLine.getOptionValue(arquivoSaida));
 
         return cmdArgsMap;
 

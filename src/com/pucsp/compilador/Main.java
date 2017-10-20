@@ -20,12 +20,6 @@ public class Main {
         Map<String,String> cmdLineArgsMap = CommandLineHelper.getCommandLineArgsAsMap(args);
 
         String pathSimbolos = cmdLineArgsMap.get("listaSimbolosTerminais");
-        List<String> simbolosSimbolos = FileReader.fileToString(pathSimbolos);
-        for(String x : simbolosSimbolos){
-            tst.searchInsert(x, 'I', true);
-        }
 
-        tst.gravaTSTBinario(cmdLineArgsMap.get("tstArquivoBinario"));
-        tst.gravaTSTTexto(cmdLineArgsMap.get("tstArquivoTexto"));
     }
 }
