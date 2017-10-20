@@ -253,11 +253,11 @@ Tabela de simbolos terminais
  Posição 251 Simbolo: \0 Colisão: -2
  Posição 252 Simbolo: \0 Colisão: -2
  Posição 253 Simbolo: \0 Colisão: -2
- Posição 254 Simbolo: IDENT Colisão: -1
- Posição 255 Simbolo: NUMBER Colisão: -1
- Posição 256 Simbolo: FLOAT Colisão: -1
- Posição 257 Simbolo: ALFA Colisão: -1
- Posição 258 Simbolo: FOF Colisão: -1
+ Posição 254 Simbolo: \0 Colisão: -2
+ Posição 255 Simbolo: \0 Colisão: -2
+ Posição 256 Simbolo: \0 Colisão: -2
+ Posição 257 Simbolo: \0 Colisão: -2
+ Posição 258 Simbolo: \0 Colisão: -2
  Posição 259 Simbolo: \0 Colisão: -2
  Posição 260 Simbolo: \0 Colisão: -2
  Posição 261 Simbolo: \0 Colisão: -2
