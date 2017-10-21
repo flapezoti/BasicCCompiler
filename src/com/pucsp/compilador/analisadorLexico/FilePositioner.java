@@ -2,56 +2,52 @@ package com.pucsp.compilador.analisadorLexico;
 
 public class FilePositioner {
     private static FilePositioner instance;
-    private int line, currentChar, lexem;
+    private int currentLine, currentChar, currentLexemBeginning;
 
-    private FilePositioner(int line, int currentChar, int lexem){
-        this.line = line;
+    private FilePositioner(int currentLine, int currentChar, int currentLexemBeginning){
+        this.currentLine = currentLine;
         this.currentChar = currentChar;
-        this.lexem = lexem;
+        this.currentLexemBeginning = currentLexemBeginning;
     }
 
     public void create(){
        this.instance = new FilePositioner(0, 0,0);
     }
 
-    public void create(int line, int currentChar, int lexem){
-        this.instance = new FilePositioner(line, currentChar, lexem);
+    public void create(int currentLine, int currentChar, int currentLexemBeginning){
+        this.instance = new FilePositioner(currentLine, currentChar, currentLexemBeginning);
     }
 
     static public FilePositioner getInstance(){
         return instance;
     }
 
-    public int nextPosition() {
+    public int nextChar() {
         currentChar = currentChar++;
         return currentChar;
     }
 
     public int nextLine() {
-        line = line++;
+        currentLine = currentLine++;
         currentChar = 0;
-        lexem = 0;
-        return line;
+        currentLexemBeginning = 0;
+        return currentLine;
     }
 
     public int getCurrentChar() {
         return currentChar;
     }
 
-    public int getLine() {
-        return line;
+    public int getCurrentLine() {
+        return currentLine;
     }
 
-    public int getLexem() {
-        return lexem;
+    public int getCurrentLexemBeginning() {
+        return currentLexemBeginning;
     }
 
-    public void markLex() {
-        lexem = currentChar++;
+    public void moveToNextLexem() {
+        currentLexemBeginning = currentChar++;
     }
-
-
-
-
 
 }
