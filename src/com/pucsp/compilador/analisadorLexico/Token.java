@@ -64,5 +64,6 @@ public class Token {
 
     public String toString(){
         return "indice na TST: " + this.getIndiceNaTST() + "\n cadeia: " + this.getItemLexico() + "\n conteudo na TST: " + this.getConteudoNaTST();
+
     }
 }
