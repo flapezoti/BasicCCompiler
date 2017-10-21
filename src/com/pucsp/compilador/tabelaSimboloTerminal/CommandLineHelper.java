@@ -28,19 +28,19 @@ public class CommandLineHelper {
         }
 
         final String arquivoFonte = "arquivoFonte";
-        final Option arquivoSimbolosOption = new Option( arquivoFonte, true, "Caminho do arquivo com a sequência de caracteres a serem analisados");
-        arquivoSimbolosOption.setRequired( true );
-        options.addOption(arquivoSimbolosOption);
+        final Option arquivoFonteOption = new Option( arquivoFonte, true, "Caminho do arquivo com a sequência de caracteres a serem analisados");
+        arquivoFonteOption.setRequired( true );
+        options.addOption(arquivoFonteOption);
 
         final String arquivoSaida = "arquivoSaida";
-        final Option arquivoTSTOption = new Option( arquivoSaida, true, "Caminho para arquivo de saída com erros e mensagens");
-        arquivoTSTOption.setRequired( true );
-        options.addOption(arquivoTSTOption);
+        final Option arquivoSaidaOption = new Option( arquivoSaida, true, "Caminho para arquivo de saída com erros e mensagens");
+        arquivoSaidaOption.setRequired( true );
+        options.addOption(arquivoSaidaOption);
 
         final String arquivoTstBinario = "arquivoTstBinario";
-        final Option arquivoLogOption = new Option( arquivoTstBinario, true, "Caminho para arquivo texto de saída dos logs da aplicação");
-        arquivoLogOption.setRequired( true );
-        options.addOption(arquivoLogOption);
+        final Option arquivoTstBinarioOption = new Option( arquivoTstBinario, true, "Caminho para arquivo texto de saída dos logs da aplicação");
+        arquivoTstBinarioOption.setRequired( true );
+        options.addOption(arquivoTstBinarioOption);
 
 
         final Parser parser = new GnuParser();
