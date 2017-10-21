@@ -1,5 +1,8 @@
 package com.pucsp.compilador.analisadorLexico;
 
+import java.io.IOException;
+import java.io.OutputStream;
+
 public class Token {
     private int indiceNaTST;
     /* o significado do lexema representado pelo índice da TST
@@ -51,5 +54,15 @@ public class Token {
 
     public void setConteudoNaTST(String conteudoNaTST) {
         this.conteudoNaTST = conteudoNaTST;
+    }
+
+    public void imprimirToken(OutputStream arquivoSaida) throws IOException {
+        arquivoSaida.write(this.toString().getBytes());
+        arquivoSaida.write("\n".getBytes());
+        arquivoSaida.flush();
+    }
+
+    public String toString(){
+        return "indice na TST: " + this.getIndiceNaTST() + "\n cadeia: " + this.getItemLexico() + "\n conteudo na TST: " + this.setConteudoNaTST();
     }
 }
