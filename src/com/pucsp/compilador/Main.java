@@ -34,9 +34,8 @@ public class Main {
         inserirSimbolosEspeciais();
         abrirArquivoSaida(exitFilePath);
 
-        FilePositioner.create();
         SourceFileReader sfr = new SourceFileReader(sourceCodeFilePath);
-        
+
         //char currentChar = sfr.nextChar();
 
     }
