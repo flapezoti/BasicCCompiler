@@ -32,10 +32,11 @@ public class Main {
         tst = new TST(tstFilePath);
 
         inserirSimbolosEspeciais();
-        //abrirArquivoFonte(sourceCodeFilePath);
         abrirArquivoSaida(exitFilePath);
 
+        FilePositioner.create();
         SourceFileReader sfr = new SourceFileReader(sourceCodeFilePath);
+        
         //char currentChar = sfr.nextChar();
 
     }
