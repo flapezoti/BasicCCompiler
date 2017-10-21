@@ -2,20 +2,18 @@ package com.pucsp.compilador.analisadorLexico;
 
 public class FilePositioner {
     private static FilePositioner instance;
-    private int currentLine, currentChar, currentLexemBeginning;
+    private int linePostition, charPosition, currentLexemBeginning;
+    private SourceFileReader srf;
 
-    private FilePositioner(int currentLine, int currentChar, int currentLexemBeginning){
-        this.currentLine = currentLine;
-        this.currentChar = currentChar;
+    private FilePositioner(int currentLine, int currentChar, int currentLexemBeginning, String sourceCodeFilePath){
+        this.linePostition = currentLine;
+        this.charPosition = currentChar;
         this.currentLexemBeginning = currentLexemBeginning;
+        this.srf = new SourceFileReader(sourceCodeFilePath);
     }
 
-    static public void create(){
-       instance = new FilePositioner(0, 0,0);
-    }
-
-    static public void create(int currentLine, int currentChar, int currentLexemBeginning){
-        instance = new FilePositioner(currentLine, currentChar, currentLexemBeginning);
+    static public void create(int currentLine, int currentChar, int currentLexemBeginning, String sourceCodeFilePath){
+        instance = new FilePositioner(currentLine, currentChar, currentLexemBeginning, sourceCodeFilePath);
     }
 
     static public FilePositioner getInstance(){
@@ -23,23 +21,37 @@ public class FilePositioner {
     }
 
     public int nextChar() {
-        currentChar++;
-        return currentChar;
+        if(!srf.currentCharIsLast()){
+            charPosition++;
+        } else {
+            charPosition = -1;
+        }
+        return charPosition;
     }
 
     public int nextLine() {
-        currentLine++;
-        currentChar = 0;
-        currentLexemBeginning = 0;
-        return currentLine;
+        if(!srf.currentLineIsLast()) {
+            linePostition++;
+            currentLexemBeginning = 0;
+            srf.nextLine();
+            if(srf.currentCharIsLast()){
+                charPosition = -1;
+            } else {
+                charPosition = 0;
+            }
+        } else {
+            linePostition = -1;
+        }
+
+        return linePostition;
     }
 
-    public int getCurrentChar() {
-        return currentChar;
+    public int getCharPosition() {
+        return charPosition;
     }
 
-    public int getCurrentLine() {
-        return currentLine;
+    public int getLinePostition() {
+        return linePostition;
     }
 
     public int getCurrentLexemBeginning() {
@@ -47,7 +59,15 @@ public class FilePositioner {
     }
 
     public void moveToNextLexem() {
-        currentLexemBeginning = currentChar + 1;
+        currentLexemBeginning = charPosition;
+    }
+
+    public char getCurrentChar(){
+        return srf.getChar();
+    }
+
+    public String getCurrentLine(){
+        return srf.getCurrentLine();
     }
 
 }

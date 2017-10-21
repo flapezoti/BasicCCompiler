@@ -18,18 +18,21 @@ public class SourceFileReader {
         nextLine();
     }
 
-    public char nextChar() throws StringIndexOutOfBoundsException {
-        FilePositioner.getInstance().nextChar();
-        return currentLine.charAt(FilePositioner.getInstance().getCurrentChar());
+    public String getCurrentLine(){ return currentLine;}
+
+    public char getChar() throws StringIndexOutOfBoundsException {
+
+        return currentLine.charAt(FilePositioner.getInstance().getCharPosition());
     }
 
     public void nextLine() throws NoSuchElementException {
-        FilePositioner.getInstance().nextLine();
         currentLine = lines.next();
+
     }
 
     public boolean currentCharIsLast() {
-        if(FilePositioner.getInstance().getCurrentChar() >= currentLine.length() - 2 ){
+        if(FilePositioner.getInstance().getCharPosition() > currentLine.length() - 2 ){
+            System.out.println("fim da linha");
             return true;
         } else {
             return false;
@@ -37,7 +40,7 @@ public class SourceFileReader {
     }
 
     public boolean currentLineIsLast() {
-        return lines.hasNext();
+        return !lines.hasNext();
     }
 
     private void abrirArquivoFonte(String sourceCodeFilePath) {

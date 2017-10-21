@@ -1,7 +1,9 @@
 package com.pucsp.compilador;
 
 import com.pucsp.compilador.analisadorLexico.FilePositioner;
+import com.pucsp.compilador.analisadorLexico.Lexan;
 import com.pucsp.compilador.analisadorLexico.SourceFileReader;
+import com.pucsp.compilador.analisadorLexico.Token;
 import com.pucsp.compilador.tabelaSimboloTerminal.CommandLineHelper;
 import com.pucsp.compilador.tabelaSimboloTerminal.TST;
 import com.pucsp.compilador.tabelaSimboloTerminal.TokensEspeciais;
@@ -27,16 +29,22 @@ public class Main {
         String sourceCodeFilePath =  cmdLineArgsMap.get("arquivoFonte");
         String exitFilePath =  cmdLineArgsMap.get("arquivoSaida");
 
-        FilePositioner.create(-1, -1, 0);
+        FilePositioner.create(0, 0, 0, sourceCodeFilePath);
 
         tst = new TST(tstFilePath);
 
         inserirSimbolosEspeciais();
         abrirArquivoSaida(exitFilePath);
 
-        SourceFileReader sfr = new SourceFileReader(sourceCodeFilePath);
+        Lexan lexan = new Lexan(tst, exitFile);
+        while(FilePositioner.getInstance().getLinePostition() != -1){
+            while(FilePositioner.getInstance().getCharPosition() != -1){
 
-        //char currentChar = sfr.nextChar();
+                Token token = lexan.aef();
+                FilePositioner.getInstance().nextChar();
+            }
+            FilePositioner.getInstance().nextLine();
+        }
 
     }
 

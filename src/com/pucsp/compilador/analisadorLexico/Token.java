@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 
 public class Token {
-    private int indiceNaTST;
+    private int indiceNaTST = -1;
     /* o significado do lexema representado pelo índice da TST
     correspondente ao item identificado. Este valor indica se o lexema é um identificador,
     palavra reservada, número, operador ou constante, etc.*/
