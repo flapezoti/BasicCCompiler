@@ -10,12 +10,12 @@ public class FilePositioner {
         this.currentLexemBeginning = currentLexemBeginning;
     }
 
-    public void create(){
-       this.instance = new FilePositioner(0, 0,0);
+    static public void create(){
+       instance = new FilePositioner(0, 0,0);
     }
 
-    public void create(int currentLine, int currentChar, int currentLexemBeginning){
-        this.instance = new FilePositioner(currentLine, currentChar, currentLexemBeginning);
+    static public void create(int currentLine, int currentChar, int currentLexemBeginning){
+        instance = new FilePositioner(currentLine, currentChar, currentLexemBeginning);
     }
 
     static public FilePositioner getInstance(){

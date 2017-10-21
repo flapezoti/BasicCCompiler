@@ -10,6 +10,8 @@ import org.apache.commons.cli.Parser;
 import org.apache.commons.cli.GnuParser;
 import org.apache.commons.cli.ParseException;
 
+import static sun.plugin.javascript.navig.JSType.Option;
+
 public class CommandLineHelper {
 
     /*

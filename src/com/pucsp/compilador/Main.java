@@ -1,5 +1,7 @@
 package com.pucsp.compilador;
 
+import com.pucsp.compilador.analisadorLexico.FilePositioner;
+import com.pucsp.compilador.analisadorLexico.SourceFileReader;
 import com.pucsp.compilador.tabelaSimboloTerminal.CommandLineHelper;
 import com.pucsp.compilador.tabelaSimboloTerminal.TST;
 
@@ -14,7 +16,6 @@ import java.util.Map;
 public class Main {
 
     private static TST tst;
-    private static BufferedReader sourceCodeFile;
     private static OutputStream exitFile;
 
     public static void main(String[] args) throws Exception {
@@ -25,11 +26,16 @@ public class Main {
         String sourceCodeFilePath =  cmdLineArgsMap.get("arquivoFonte");
         String exitFilePath =  cmdLineArgsMap.get("arquivoSaida");
 
+        FilePositioner.create(-1, -1, 0);
+
         tst = new TST(tstFilePath);
 
         inserirSimbolosEspeciais();
-        abrirArquivoFonte(sourceCodeFilePath);
+        //abrirArquivoFonte(sourceCodeFilePath);
         abrirArquivoSaida(exitFilePath);
+
+        SourceFileReader sfr = new SourceFileReader(sourceCodeFilePath);
+        //char currentChar = sfr.nextChar();
 
     }
 
@@ -43,15 +49,6 @@ public class Main {
             }
         }
 
-    }
-
-    private static void abrirArquivoFonte(String sourceCodeFilePath) {
-        try{
-            sourceCodeFile = new BufferedReader(new FileReader(sourceCodeFilePath));
-        }catch(IOException e){
-            System.err.println("Problema ao abrir o arquivo " + sourceCodeFilePath);
-            System.exit(-1);
-        }
     }
 
     private static void inserirSimbolosEspeciais(){
