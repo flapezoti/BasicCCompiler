@@ -23,12 +23,12 @@ public class FilePositioner {
     }
 
     public int nextChar() {
-        currentChar = currentChar++;
+        currentChar++;
         return currentChar;
     }
 
     public int nextLine() {
-        currentLine = currentLine++;
+        currentLine++;
         currentChar = 0;
         currentLexemBeginning = 0;
         return currentLine;
@@ -47,7 +47,7 @@ public class FilePositioner {
     }
 
     public void moveToNextLexem() {
-        currentLexemBeginning = currentChar++;
+        currentLexemBeginning = currentChar + 1;
     }
 
 }
