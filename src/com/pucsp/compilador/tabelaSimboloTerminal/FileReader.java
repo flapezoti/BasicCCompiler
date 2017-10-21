@@ -17,9 +17,9 @@ public class FileReader {
 
         try (Stream<String> stream = Files.lines(Paths.get(path))) {
 
-            for(Object a : stream.toArray()){
-                String aa = (String) a;
-                simbolos.add(aa);
+            for(Object obj : stream.toArray()){
+                String symbol = (String) obj;
+                simbolos.add(symbol);
             }
 
         } catch (IOException e) {
