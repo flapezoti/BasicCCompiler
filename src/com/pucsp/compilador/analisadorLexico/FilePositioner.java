@@ -42,6 +42,10 @@ public class FilePositioner {
         return line;
     }
 
+    public int getLexem() {
+        return lexem;
+    }
+
     public void markLex() {
         lexem = currentChar++;
     }
