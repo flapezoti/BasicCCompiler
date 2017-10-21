@@ -2,6 +2,7 @@ package com.pucsp.compilador;
 
 import com.pucsp.compilador.tabelaSimboloTerminal.CommandLineHelper;
 import com.pucsp.compilador.tabelaSimboloTerminal.TST;
+import com.pucsp.compilador.tabelaSimboloTerminal.TokensEspeciais;
 
 import java.io.BufferedReader;
 import java.io.FileOutputStream;
@@ -61,10 +62,10 @@ public class Main {
           ID, NUMBER, FLOAT, ALPHA, EOF defina constantes para eles
         */
 
-        tst.insereSimboloEspecial("ID");
-        tst.insereSimboloEspecial("NUMBER");
-        tst.insereSimboloEspecial("FLOAT");
-        tst.insereSimboloEspecial("ALPHA");
-        tst.insereSimboloEspecial("EOF");
+        tst.insereSimboloEspecial(TokensEspeciais.IDENT.name());
+        tst.insereSimboloEspecial(TokensEspeciais.ALPHA.name());
+        tst.insereSimboloEspecial(TokensEspeciais.FLOAT.name());
+        tst.insereSimboloEspecial(TokensEspeciais.NUMBER.name());
+        tst.insereSimboloEspecial(TokensEspeciais.EOF.name());
     }
 }
